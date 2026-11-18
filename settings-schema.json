@@ -1,0 +1,195 @@
+{
+    "layout": {
+        "type": "layout",
+        "pages": ["general-page", "advanced-page"],
+        "general-page": {
+            "type": "page",
+            "title": "Appearance",
+            "sections": ["language-section", "preset-section", "effects-section"]
+        },
+        "advanced-page": {
+            "type": "page",
+            "title": "Advanced & Behavior",
+            "sections": ["shader-section", "border-section", "backdrop-section"]
+        },
+        "language-section": {
+            "type": "section",
+            "title": "Language / Idioma",
+            "keys": ["language"]
+        },
+        "preset-section": {
+            "type": "section",
+            "title": "Windows 11 Theme & Opacity",
+            "keys": ["preset", "opacity-level", "adapt-light-text"]
+        },
+        "effects-section": {
+            "type": "section",
+            "title": "Start Menu, Buttons & Blur",
+            "keys": [
+                "blur-start-menu",
+                "style-panel-buttons",
+                "blur-radius",
+                "noise-intensity",
+                "show-border"
+            ]
+        },
+        "shader-section": {
+            "type": "section",
+            "title": "Custom Acrylic Fine-Tuning",
+            "keys": [
+                "luminosity-opacity",
+                "luminosity-color",
+                "tint-opacity",
+                "tint-color",
+                "saturation"
+            ]
+        },
+        "border-section": {
+            "type": "section",
+            "title": "Custom Border (Hairline)",
+            "keys": ["border-color", "border-opacity"]
+        },
+        "backdrop-section": {
+            "type": "section",
+            "title": "Backdrop Capture & Maximize Behavior",
+            "keys": ["blur-windows", "keep-frosted-maximized", "opaque-fallback-color"]
+        }
+    },
+    "language": {
+        "type": "combobox",
+        "default": "en",
+        "description": "Language / Idioma",
+        "tooltip": "Select settings language (reopen Extension Settings after changing).",
+        "options": {
+            "English (Default)": "en",
+            "Português (Brasil) - PT-BR": "ptbr"
+        }
+    },
+    "preset": {
+        "type": "combobox",
+        "default": "system",
+        "description": "Color mode (calibrated via Windows 11 VM)",
+        "options": {
+            "Follow System (Default)": "system",
+            "Windows 11 Light": "win11-light",
+            "Windows 11 Dark": "win11-dark",
+            "Custom": "custom"
+        }
+    },
+    "opacity-level": {
+        "type": "scale",
+        "default": 0.60,
+        "min": 0.0,
+        "max": 1.0,
+        "step": 0.05,
+        "description": "Opacity level (0.60 = Windows 11 default)",
+        "dependency": "preset!=custom"
+    },
+    "adapt-light-text": {
+        "type": "switch",
+        "default": true,
+        "description": "Use dark text and icons in Light mode",
+        "dependency": "preset!=win11-dark"
+    },
+    "blur-start-menu": {
+        "type": "switch",
+        "default": true,
+        "description": "Apply frosted Acrylic effect to Start Menu"
+    },
+    "style-panel-buttons": {
+        "type": "switch",
+        "default": true,
+        "description": "Apply Windows 11 hover, focus and indicator effect to taskbar buttons"
+    },
+    "blur-radius": {
+        "type": "scale",
+        "default": 28,
+        "min": 0,
+        "max": 60,
+        "step": 1,
+        "description": "Blur radius"
+    },
+    "noise-intensity": {
+        "type": "scale",
+        "default": 0.024,
+        "min": 0.0,
+        "max": 0.08,
+        "step": 0.002,
+        "description": "Frosted matte grain (Acrylic noise)"
+    },
+    "show-border": {
+        "type": "switch",
+        "default": true,
+        "description": "Show 1px inner-edge hairline highlight (Windows 11 style)"
+    },
+    "luminosity-opacity": {
+        "type": "scale",
+        "default": 0.90,
+        "min": 0.0,
+        "max": 1.0,
+        "step": 0.02,
+        "description": "Luminosity blend strength (Acrylic)",
+        "dependency": "preset=custom"
+    },
+    "luminosity-color": {
+        "type": "colorchooser",
+        "default": "rgb(34,34,34)",
+        "description": "Target luminosity color",
+        "dependency": "preset=custom"
+    },
+    "tint-opacity": {
+        "type": "scale",
+        "default": 0.60,
+        "min": 0.0,
+        "max": 1.0,
+        "step": 0.02,
+        "description": "Tint layer opacity",
+        "dependency": "preset=custom"
+    },
+    "tint-color": {
+        "type": "colorchooser",
+        "default": "rgb(32,32,32)",
+        "description": "Tint color",
+        "dependency": "preset=custom"
+    },
+    "saturation": {
+        "type": "scale",
+        "default": 1.0,
+        "min": 0.0,
+        "max": 1.5,
+        "step": 0.05,
+        "description": "Backdrop saturation",
+        "dependency": "preset=custom"
+    },
+    "border-color": {
+        "type": "colorchooser",
+        "default": "rgb(118,118,118)",
+        "description": "1px border color",
+        "dependency": "preset=custom"
+    },
+    "border-opacity": {
+        "type": "scale",
+        "default": 0.40,
+        "min": 0.0,
+        "max": 1.0,
+        "step": 0.02,
+        "description": "1px border opacity",
+        "dependency": "preset=custom"
+    },
+    "blur-windows": {
+        "type": "switch",
+        "default": true,
+        "description": "Blur windows behind the taskbar (Acrylic; turn off for wallpaper Mica)"
+    },
+    "keep-frosted-maximized": {
+        "type": "switch",
+        "default": true,
+        "description": "Keep taskbar frosted when a window is maximized (Windows 11 style)"
+    },
+    "opaque-fallback-color": {
+        "type": "colorchooser",
+        "default": "rgb(32,32,32)",
+        "description": "Solid color when a maximized window disables transparency",
+        "dependency": "!keep-frosted-maximized"
+    }
+}

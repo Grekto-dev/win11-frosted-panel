@@ -1,0 +1,432 @@
+/*
+ * Windows 11 Taskbar Button States (Dark & Light Acrylic)
+ * Calibrated against Windows 11 VM hover/focus measurements.
+ * Scoped to .win11-frosted-panel.win11-frosted-buttons so disabling the
+ * extension or maximizing (opaque fallback) cleanly restores the active theme.
+ */
+
+/* --- Grouped Window List (Taskbar App Icons) - Dark Mode --- */
+
+.win11-frosted-panel.win11-frosted-buttons .grouped-window-list-item-box {
+    color: rgba(240, 240, 245, 0.88);
+    background-color: transparent;
+    background-image: none;
+    background-gradient-direction: none;
+    box-shadow: none;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    margin: 3px 1px;
+    padding: 0 7px;
+    transition-duration: 120ms;
+}
+
+.win11-frosted-panel.win11-frosted-buttons .grouped-window-list-item-box.bottom,
+.win11-frosted-panel.win11-frosted-buttons .grouped-window-list-item-box.top {
+    border-width: 1px;
+}
+
+.win11-frosted-panel.win11-frosted-buttons .grouped-window-list-item-box.left,
+.win11-frosted-panel.win11-frosted-buttons .grouped-window-list-item-box.right {
+    margin: 1px 3px;
+    padding: 4px 0;
+    border-width: 1px;
+}
+
+/* Open, unfocused app */
+.win11-frosted-panel.win11-frosted-buttons .grouped-window-list-item-box:active {
+    color: rgba(255, 255, 255, 0.94);
+    background-color: transparent;
+    border-color: transparent;
+}
+
+/* Hover (pinned or open unfocused) - Win11 ~rgba(255,255,255,0.065) + 1px top sheen */
+.win11-frosted-panel.win11-frosted-buttons .grouped-window-list-item-box:hover {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.065);
+    border-color: rgba(255, 255, 255, 0.055);
+    border-top-color: rgba(255, 255, 255, 0.105);
+}
+
+/* Focused (active) window button (idle, unhovered) */
+.win11-frosted-panel.win11-frosted-buttons .grouped-window-list-item-box:focus {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.055);
+    border-color: rgba(255, 255, 255, 0.075);
+    border-top-color: rgba(255, 255, 255, 0.125);
+}
+
+/* Focused + hovered */
+.win11-frosted-panel.win11-frosted-buttons .grouped-window-list-item-box:focus:hover,
+.win11-frosted-panel.win11-frosted-buttons .grouped-window-list-item-box:active:focus:hover {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.085);
+    border-color: rgba(255, 255, 255, 0.08);
+    border-top-color: rgba(255, 255, 255, 0.135);
+}
+
+/* Checked (open thumbnail menu / context menu) */
+.win11-frosted-panel.win11-frosted-buttons .grouped-window-list-item-box:checked {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.075);
+    border-top-color: rgba(255, 255, 255, 0.125);
+}
+
+/* Running & Focused Win11 Pill Indicators */
+.win11-frosted-panel.win11-frosted-buttons .grouped-window-list-item-box .win11-taskbar-indicator {
+    border-radius: 2px;
+    background-color: transparent;
+    width: 6px;
+    height: 3px;
+    transition-duration: 120ms;
+}
+
+.win11-frosted-panel.win11-frosted-buttons .grouped-window-list-item-box.left .win11-taskbar-indicator,
+.win11-frosted-panel.win11-frosted-buttons .grouped-window-list-item-box.right .win11-taskbar-indicator {
+    width: 3px;
+    height: 6px;
+}
+
+.win11-frosted-panel.win11-frosted-buttons .grouped-window-list-item-box:active .win11-taskbar-indicator {
+    background-color: rgba(255, 255, 255, 0.48);
+}
+
+.win11-frosted-panel.win11-frosted-buttons .grouped-window-list-item-box:active:hover .win11-taskbar-indicator {
+    background-color: rgba(255, 255, 255, 0.65);
+}
+
+.win11-frosted-panel.win11-frosted-buttons .grouped-window-list-item-box:focus .win11-taskbar-indicator,
+.win11-frosted-panel.win11-frosted-buttons .grouped-window-list-item-box:focus:hover .win11-taskbar-indicator,
+.win11-frosted-panel.win11-frosted-buttons .grouped-window-list-item-box:active:focus .win11-taskbar-indicator,
+.win11-frosted-panel.win11-frosted-buttons .grouped-window-list-item-box:active:focus:hover .win11-taskbar-indicator,
+.win11-frosted-panel.win11-frosted-buttons .grouped-window-list-item-box:checked .win11-taskbar-indicator {
+    width: 16px;
+    background-color: #4cc2ff;
+}
+
+.win11-frosted-panel.win11-frosted-buttons .grouped-window-list-item-box.left:focus .win11-taskbar-indicator,
+.win11-frosted-panel.win11-frosted-buttons .grouped-window-list-item-box.left:focus:hover .win11-taskbar-indicator,
+.win11-frosted-panel.win11-frosted-buttons .grouped-window-list-item-box.left:checked .win11-taskbar-indicator,
+.win11-frosted-panel.win11-frosted-buttons .grouped-window-list-item-box.right:focus .win11-taskbar-indicator,
+.win11-frosted-panel.win11-frosted-buttons .grouped-window-list-item-box.right:focus:hover .win11-taskbar-indicator,
+.win11-frosted-panel.win11-frosted-buttons .grouped-window-list-item-box.right:checked .win11-taskbar-indicator {
+    width: 3px;
+    height: 16px;
+}
+
+.win11-frosted-panel.win11-frosted-buttons .grouped-window-list-item-demands-attention {
+    background-color: rgba(240, 74, 80, 0.55);
+    border-color: rgba(255, 130, 135, 0.45);
+}
+
+/* Preserve win11-menu@cinnamon Start & Search buttons without 2px indicator bar */
+.win11-frosted-panel.win11-frosted-buttons .win11-start-button.grouped-window-list-item-box,
+.win11-frosted-panel.win11-frosted-buttons .win11-search-panel-icon-btn.grouped-window-list-item-box {
+    padding: 0 4px;
+    margin: 3px 0;
+    border-width: 1px;
+    border-color: transparent;
+}
+
+.win11-frosted-panel.win11-frosted-buttons .win11-start-button.grouped-window-list-item-box:hover,
+.win11-frosted-panel.win11-frosted-buttons .win11-search-panel-icon-btn.grouped-window-list-item-box:hover {
+    background-color: rgba(255, 255, 255, 0.065);
+    border-color: rgba(255, 255, 255, 0.055);
+    border-top-color: rgba(255, 255, 255, 0.105);
+}
+
+.win11-frosted-panel.win11-frosted-buttons .win11-start-button.grouped-window-list-item-box:active,
+.win11-frosted-panel.win11-frosted-buttons .win11-start-button.grouped-window-list-item-box:checked,
+.win11-frosted-panel.win11-frosted-buttons .win11-search-panel-icon-btn.grouped-window-list-item-box:active,
+.win11-frosted-panel.win11-frosted-buttons .win11-search-panel-icon-btn.grouped-window-list-item-box:checked {
+    background-color: rgba(255, 255, 255, 0.085);
+    border-color: rgba(255, 255, 255, 0.075);
+    border-top-color: rgba(255, 255, 255, 0.125);
+}
+
+/* --- Panel Launchers --- */
+
+.win11-frosted-panel.win11-frosted-buttons .panel-launchers .launcher {
+    border-radius: 4px;
+    border: 1px solid transparent;
+    background-color: transparent;
+    margin: 3px 1px;
+    padding: 0 4px;
+    transition-duration: 120ms;
+}
+
+.win11-frosted-panel.win11-frosted-buttons .panel-launchers .launcher:hover {
+    background-color: rgba(255, 255, 255, 0.065);
+    border-color: rgba(255, 255, 255, 0.055);
+    border-top-color: rgba(255, 255, 255, 0.105);
+}
+
+/* --- System Tray & Panel Applets (Clock, Quick Settings, Collapsible Tray, etc.) --- */
+
+.win11-frosted-panel.win11-frosted-buttons .applet-box {
+    border-radius: 4px;
+    border: 1px solid transparent;
+    background-color: transparent;
+    background-image: none;
+    box-shadow: none;
+    margin: 3px 1px;
+    padding: 0 5px;
+    transition-duration: 120ms;
+}
+
+.win11-frosted-panel.win11-frosted-buttons .applet-box.vertical {
+    margin: 1px 3px;
+    padding: 5px 0;
+}
+
+.win11-frosted-panel.win11-frosted-buttons .applet-box:hover {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.065);
+    border-color: rgba(255, 255, 255, 0.055);
+    border-top-color: rgba(255, 255, 255, 0.105);
+}
+
+.win11-frosted-panel.win11-frosted-buttons .applet-box:checked,
+.win11-frosted-panel.win11-frosted-buttons .applet-box:active {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.085);
+    border-color: rgba(255, 255, 255, 0.075);
+    border-top-color: rgba(255, 255, 255, 0.125);
+}
+
+.win11-frosted-panel.win11-frosted-buttons .applet-box:highlight {
+    background-color: rgba(252, 65, 56, 0.5);
+    border-color: rgba(252, 65, 56, 0.6);
+}
+
+/* --- Show Desktop (Cornerbar) - Windows 11 Style --- */
+
+.win11-frosted-panel.win11-frosted-buttons .applet-cornerbar-box {
+    background-color: transparent;
+    background-image: none;
+    padding: 0;
+}
+
+.win11-frosted-panel.win11-frosted-buttons .applet-cornerbar {
+    width: 1px;
+    margin: 12px 6px 12px 2px;
+    background-color: transparent;
+    border-width: 0;
+    border-color: transparent;
+    transition-duration: 120ms;
+}
+
+.win11-frosted-panel.win11-frosted-buttons .applet-cornerbar.vertical {
+    width: 22px;
+    height: 1px;
+    margin: 2px 12px 6px 12px;
+}
+
+.win11-frosted-panel.win11-frosted-buttons .applet-cornerbar-box:hover > .applet-cornerbar {
+    background-color: rgba(255, 255, 255, 0.55);
+}
+
+/* --- Windows 11 Light Mode Preset Overrides --- */
+
+.win11-frosted-panel.win11-frosted-panel-light.win11-frosted-buttons .applet-box,
+.win11-frosted-panel.win11-frosted-panel-light.win11-frosted-buttons .applet-label,
+.win11-frosted-panel.win11-frosted-panel-light.win11-frosted-buttons .applet-icon {
+    color: #1f1f1f;
+}
+
+.win11-frosted-panel.win11-frosted-panel-light.win11-frosted-buttons .grouped-window-list-item-box {
+    color: rgba(24, 24, 28, 0.86);
+}
+
+.win11-frosted-panel.win11-frosted-panel-light.win11-frosted-buttons .grouped-window-list-item-box:active {
+    color: #18181c;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.win11-frosted-panel.win11-frosted-panel-light.win11-frosted-buttons .grouped-window-list-item-box:hover,
+.win11-frosted-panel.win11-frosted-panel-light.win11-frosted-buttons .panel-launchers .launcher:hover,
+.win11-frosted-panel.win11-frosted-panel-light.win11-frosted-buttons .applet-box:hover {
+    color: #111111;
+    background-color: rgba(255, 255, 255, 0.50);
+    border-color: rgba(0, 0, 0, 0.06);
+    border-top-color: rgba(255, 255, 255, 0.80);
+}
+
+.win11-frosted-panel.win11-frosted-panel-light.win11-frosted-buttons .grouped-window-list-item-box:focus {
+    color: #111111;
+    background-color: rgba(255, 255, 255, 0.42);
+    border-color: rgba(0, 0, 0, 0.07);
+    border-top-color: rgba(255, 255, 255, 0.85);
+}
+
+.win11-frosted-panel.win11-frosted-panel-light.win11-frosted-buttons .grouped-window-list-item-box:focus:hover,
+.win11-frosted-panel.win11-frosted-panel-light.win11-frosted-buttons .grouped-window-list-item-box:active:focus:hover,
+.win11-frosted-panel.win11-frosted-panel-light.win11-frosted-buttons .grouped-window-list-item-box:checked,
+.win11-frosted-panel.win11-frosted-panel-light.win11-frosted-buttons .applet-box:checked,
+.win11-frosted-panel.win11-frosted-panel-light.win11-frosted-buttons .applet-box:active {
+    color: #111111;
+    background-color: rgba(255, 255, 255, 0.65);
+    border-color: rgba(0, 0, 0, 0.08);
+    border-top-color: rgba(255, 255, 255, 0.90);
+}
+
+.win11-frosted-panel.win11-frosted-panel-light.win11-frosted-buttons .applet-box:hover .applet-label,
+.win11-frosted-panel.win11-frosted-panel-light.win11-frosted-buttons .applet-box:checked .applet-label,
+.win11-frosted-panel.win11-frosted-panel-light.win11-frosted-buttons .applet-box:hover > .applet-icon,
+.win11-frosted-panel.win11-frosted-panel-light.win11-frosted-buttons .applet-box:checked > .applet-icon {
+    color: #111111;
+}
+
+.win11-frosted-panel.win11-frosted-panel-light.win11-frosted-buttons .grouped-window-list-item-box:active .win11-taskbar-indicator {
+    background-color: rgba(0, 0, 0, 0.42);
+}
+
+.win11-frosted-panel.win11-frosted-panel-light.win11-frosted-buttons .grouped-window-list-item-box:active:hover .win11-taskbar-indicator {
+    background-color: rgba(0, 0, 0, 0.58);
+}
+
+.win11-frosted-panel.win11-frosted-panel-light.win11-frosted-buttons .grouped-window-list-item-box:focus .win11-taskbar-indicator,
+.win11-frosted-panel.win11-frosted-panel-light.win11-frosted-buttons .grouped-window-list-item-box:focus:hover .win11-taskbar-indicator,
+.win11-frosted-panel.win11-frosted-panel-light.win11-frosted-buttons .grouped-window-list-item-box:active:focus .win11-taskbar-indicator,
+.win11-frosted-panel.win11-frosted-panel-light.win11-frosted-buttons .grouped-window-list-item-box:active:focus:hover .win11-taskbar-indicator,
+.win11-frosted-panel.win11-frosted-panel-light.win11-frosted-buttons .grouped-window-list-item-box:checked .win11-taskbar-indicator {
+    background-color: #0067c0;
+}
+
+.win11-frosted-panel.win11-frosted-panel-light.win11-frosted-buttons .win11-start-button.grouped-window-list-item-box:hover,
+.win11-frosted-panel.win11-frosted-panel-light.win11-frosted-buttons .win11-search-panel-icon-btn.grouped-window-list-item-box:hover {
+    background-color: rgba(255, 255, 255, 0.50);
+    border-color: rgba(0, 0, 0, 0.06);
+    border-top-color: rgba(255, 255, 255, 0.80);
+}
+
+.win11-frosted-panel.win11-frosted-panel-light.win11-frosted-buttons .applet-cornerbar-box:hover > .applet-cornerbar {
+    background-color: rgba(0, 0, 0, 0.45);
+}
+
+/* --- Windows 11 Frosted Acrylic Start Menu --- */
+
+.win11-frosted-menu-shadow {
+    background-color: rgba(0, 0, 0, 0.01);
+    border-radius: 8px;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.58);
+}
+
+.win11-frosted-menu-shadow.win11-frosted-menu-shadow-light {
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.24);
+}
+
+.menu.appmenu-background.win11-frosted-start-menu,
+.menu.appmenu-background.menu-bottom.win11-frosted-start-menu,
+.menu.appmenu-background.menu-top.win11-frosted-start-menu,
+.menu.appmenu-background.menu-left.win11-frosted-start-menu,
+.menu.appmenu-background.menu-right.win11-frosted-start-menu {
+    background-color: transparent;
+    background-gradient-direction: none;
+    background-image: none;
+    border-image: none;
+    border-width: 0;
+    border-color: transparent;
+    box-shadow: none;
+    border-radius: 8px;
+}
+
+.win11-frosted-start-menu .appmenu-sidebar.win11-footer-bar {
+    background-color: rgba(0, 0, 0, 0.22);
+    background-image: none;
+    border-width: 0;
+    border-top-width: 1px;
+    border-color: rgba(255, 255, 255, 0.06);
+    border-radius: 0 0 8px 8px;
+    box-shadow: none;
+}
+
+.win11-frosted-start-menu #appmenu-search-entry.win11-search-entry {
+    background-color: rgba(20, 22, 26, 0.72);
+    background-image: none;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-bottom-color: rgba(255, 255, 255, 0.24);
+    box-shadow: none;
+}
+
+.win11-frosted-start-menu #appmenu-search-entry.win11-search-entry:hover {
+    background-color: rgba(26, 28, 33, 0.78);
+    border-color: rgba(255, 255, 255, 0.12);
+    border-bottom-color: rgba(255, 255, 255, 0.30);
+}
+
+.win11-frosted-start-menu #appmenu-search-entry.win11-search-entry:focus {
+    background-color: rgba(16, 18, 22, 0.86);
+    border-color: rgba(255, 255, 255, 0.14);
+    border-bottom-color: #60cdff;
+    box-shadow: none;
+}
+
+.win11-frosted-start-menu .win11-section-action-btn,
+.win11-frosted-start-menu .win11-pinned-tile,
+.win11-frosted-start-menu .win11-category-tile {
+    background-color: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.06);
+}
+
+.win11-frosted-start-menu .win11-pinned-tile {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.win11-frosted-start-menu .win11-pinned-tile:hover,
+.win11-frosted-start-menu .win11-section-action-btn:hover,
+.win11-frosted-start-menu .win11-category-tile:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.09);
+}
+
+.win11-frosted-start-menu .win11-pinned-tile:active,
+.win11-frosted-start-menu .win11-section-action-btn:active {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* --- Start Menu Light Mode Preset Overrides --- */
+
+.win11-frosted-start-menu.win11-frosted-start-menu-light,
+.win11-frosted-start-menu.win11-frosted-start-menu-light StLabel,
+.win11-frosted-start-menu.win11-frosted-start-menu-light StIcon {
+    color: #1f1f1f;
+}
+
+.win11-frosted-start-menu.win11-frosted-start-menu-light .appmenu-sidebar.win11-footer-bar {
+    background-color: rgba(0, 0, 0, 0.045);
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+.win11-frosted-start-menu.win11-frosted-start-menu-light #appmenu-search-entry.win11-search-entry {
+    background-color: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-bottom-color: rgba(0, 0, 0, 0.18);
+    color: #1f1f1f;
+    caret-color: #1f1f1f;
+}
+
+.win11-frosted-start-menu.win11-frosted-start-menu-light #appmenu-search-entry.win11-search-entry StLabel.hint-text {
+    color: rgba(0, 0, 0, 0.58);
+}
+
+.win11-frosted-start-menu.win11-frosted-start-menu-light #appmenu-search-entry.win11-search-entry:focus {
+    background-color: rgba(255, 255, 255, 0.99);
+    border-color: rgba(0, 0, 0, 0.10);
+    border-bottom-color: #0067c0;
+}
+
+.win11-frosted-start-menu.win11-frosted-start-menu-light .win11-section-action-btn,
+.win11-frosted-start-menu.win11-frosted-start-menu-light .win11-category-tile {
+    background-color: rgba(255, 255, 255, 0.45);
+    border-color: rgba(0, 0, 0, 0.05);
+}
+
+.win11-frosted-start-menu.win11-frosted-start-menu-light .win11-pinned-tile:hover,
+.win11-frosted-start-menu.win11-frosted-start-menu-light .win11-section-action-btn:hover,
+.win11-frosted-start-menu.win11-frosted-start-menu-light .win11-category-tile:hover {
+    background-color: rgba(255, 255, 255, 0.72);
+    border-color: rgba(0, 0, 0, 0.07);
+}
