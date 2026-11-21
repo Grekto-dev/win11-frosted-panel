@@ -134,6 +134,7 @@ class Win11FrostedTaskbarManager {
         this._bindSettings();
         this._initSystemThemeMonitors();
         this._syncLanguageLocale();
+        this._initCustomWallpaper();
 
         this._origPanelEnable = Panel.Panel.prototype.enable;
         this._origPanelDisable = Panel.Panel.prototype.disable;
@@ -176,6 +177,8 @@ class Win11FrostedTaskbarManager {
             'preset',
             'opacity-level',
             'adapt-light-text',
+            'use-custom-wallpaper',
+            'custom-wallpaper-variant',
             'style-panel-buttons',
             'blur-radius',
             'luminosity-opacity',
@@ -305,9 +308,128 @@ class Win11FrostedTaskbarManager {
         }
     }
 
+    _getCustomWallpaperUris() {
+        if (!_extensionMeta || !_extensionMeta.path)
+            return null;
+        const darkPath = GLib.build_filenamev([_extensionMeta.path, 'wallpapers', 'mint_dark.png']);
+        const lightPath = GLib.build_filenamev([_extensionMeta.path, 'wallpapers', 'mint_light.png']);
+        return {
+            darkPath,
+            lightPath,
+            darkUri: GLib.filename_to_uri(darkPath, null),
+            lightUri: GLib.filename_to_uri(lightPath, null),
+        };
+    }
+
+    _isBundledWallpaperUri(uri, uris) {
+        if (!uri || !uris)
+            return false;
+        return uri === uris.darkUri || uri === uris.lightUri;
+    }
+
+    _getWallpaperBackupPath() {
+        return GLib.build_filenamev([
+            GLib.get_user_config_dir(), 'cinnamon', 'spices', this._uuid, 'previous-wallpaper.json',
+        ]);
+    }
+
+    _loadPreviousWallpaper() {
+        const path = this._getWallpaperBackupPath();
+        if (!GLib.file_test(path, GLib.FileTest.EXISTS))
+            return null;
+        try {
+            const [ok, contents] = GLib.file_get_contents(path);
+            if (!ok)
+                return null;
+            return JSON.parse(new TextDecoder().decode(contents));
+        } catch (e) {
+            global.logWarning(`${this._uuid}: failed to read wallpaper backup: ${e}`);
+            return null;
+        }
+    }
+
+    _savePreviousWallpaper(pictureUri, pictureOptions) {
+        const path = this._getWallpaperBackupPath();
+        try {
+            GLib.mkdir_with_parents(GLib.path_get_dirname(path), 0o755);
+            GLib.file_set_contents(path, JSON.stringify({ pictureUri, pictureOptions }));
+        } catch (e) {
+            global.logWarning(`${this._uuid}: failed to save wallpaper backup: ${e}`);
+        }
+    }
+
+    _clearPreviousWallpaper() {
+        const path = this._getWallpaperBackupPath();
+        const file = Gio.File.new_for_path(path);
+        try {
+            if (file.query_exists(null))
+                file.delete(null);
+        } catch (e) {
+            global.logWarning(`${this._uuid}: failed to remove wallpaper backup: ${e}`);
+        }
+    }
+
+    _initCustomWallpaper() {
+        this._bgSettings = null;
+        const schemaSource = Gio.SettingsSchemaSource.get_default();
+        const bgSchema = schemaSource
+            ? schemaSource.lookup('org.cinnamon.desktop.background', true)
+            : null;
+        if (!bgSchema || !bgSchema.has_key('picture-uri'))
+            return;
+
+        this._bgSettings = new Gio.Settings({ schema_id: 'org.cinnamon.desktop.background' });
+        this._syncCustomWallpaper();
+    }
+
+    _syncCustomWallpaper() {
+        if (!this._bgSettings)
+            return;
+        const uris = this._getCustomWallpaperUris();
+        if (!uris)
+            return;
+
+        const currentUri = this._bgSettings.get_string('picture-uri') || '';
+        const hasOptions = this._bgSettings.settings_schema.has_key('picture-options');
+        const currentOptions = hasOptions ? this._bgSettings.get_string('picture-options') : '';
+
+        if (this._prefs.useCustomWallpaper) {
+            if (!this._isBundledWallpaperUri(currentUri, uris)) {
+                this._savePreviousWallpaper(currentUri, currentOptions);
+            }
+
+            const useLight = this._prefs.customWallpaperVariant === 'light';
+            const targetPath = useLight ? uris.lightPath : uris.darkPath;
+            const targetUri = useLight ? uris.lightUri : uris.darkUri;
+            if (!GLib.file_test(targetPath, GLib.FileTest.EXISTS)) {
+                global.logWarning(`${this._uuid}: wallpaper file not found: ${targetPath}`);
+                return;
+            }
+            if (hasOptions && currentOptions === 'none')
+                this._bgSettings.set_string('picture-options', 'zoom');
+            if (currentUri !== targetUri)
+                this._bgSettings.set_string('picture-uri', targetUri);
+        } else {
+            const backup = this._loadPreviousWallpaper();
+            if (!backup)
+                return;
+            if (this._isBundledWallpaperUri(currentUri, uris)) {
+                if (typeof backup.pictureUri === 'string')
+                    this._bgSettings.set_string('picture-uri', backup.pictureUri);
+                if (hasOptions && typeof backup.pictureOptions === 'string' && backup.pictureOptions.length)
+                    this._bgSettings.set_string('picture-options', backup.pictureOptions);
+            }
+            this._clearPreviousWallpaper();
+        }
+    }
+
     _onSettingsChanged(key) {
         if (key === 'language') {
             this._syncLanguageLocale();
+            return;
+        }
+        if (key === 'use-custom-wallpaper' || key === 'custom-wallpaper-variant') {
+            this._syncCustomWallpaper();
             return;
         }
         if (key === 'keep-frosted-maximized') {

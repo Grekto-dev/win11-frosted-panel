@@ -10,6 +10,7 @@ A lightweight **Cinnamon desktop extension** (`win11-frosted-panel@pedro`) that 
   - **Windows 11 Dark & Windows 11 Light**: Calibrated Acrylic material presets for both taskbars and Start Menu surfaces.
   - **Custom**: Full control over blur radius, luminosity blend color/opacity, tint color/opacity, backdrop saturation, noise grain, and 1px inner-edge hairline.
 - **Opacity Control (`opacity-level`)**: Smooth slider (`0.0` to `1.0`, default `0.60`) scaling the calibrated Acrylic translucency.
+- **Bundled Custom Wallpapers (`use-custom-wallpaper`, `custom-wallpaper-variant`)**: Optional toggle (disabled by default) to immediately apply the included `wallpapers/mint_light.png` or `wallpapers/mint_dark.png` wallpaper, restoring your previous desktop wallpaper automatically when turned off.
 - **Start Menu Frosting (`blur-start-menu`)**: Applies backdrop-aware Acrylic blur behind Cinnamon/Win11 Start Menu popups (capturing windows directly behind the menu rather than only desktop wallpaper).
 - **Taskbar Button Styling (`style-panel-buttons`)**: Windows 11-inspired hover/focus pill transitions, active/running underline indicators, and Show Desktop corner styling (`stylesheet.css`).
 - **Bilingual Settings UI**: English (Default) and Português (Brasil) (`pt_BR`) included via compiled gettext translation (`locale/` and `po/pt_BR.po`).

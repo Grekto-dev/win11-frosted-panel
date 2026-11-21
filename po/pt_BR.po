@@ -60,6 +60,24 @@ msgstr "Nível de opacidade (0.60 = padrão Windows 11)"
 msgid "Use dark text and icons in Light mode"
 msgstr "Usar texto e ícones escuros no modo Claro"
 
+msgid "Custom Wallpaper"
+msgstr "Papel de Parede Personalizado"
+
+msgid "Use extension custom wallpaper"
+msgstr "Usar papel de parede personalizado da extensão"
+
+msgid "Applies the bundled Mint Light or Dark wallpaper immediately. Disable to restore your previous wallpaper."
+msgstr "Aplica imediatamente o papel de parede Mint Claro ou Escuro incluído. Desative para restaurar o papel de parede anterior."
+
+msgid "Wallpaper variant"
+msgstr "Estilo do papel de parede"
+
+msgid "Light"
+msgstr "Claro"
+
+msgid "Dark"
+msgstr "Escuro"
+
 msgid "Apply frosted Acrylic effect to Start Menu"
 msgstr "Aplicar efeito vidro fosco (Acrylic) ao Menu Iniciar"
 

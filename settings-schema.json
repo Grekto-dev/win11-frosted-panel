@@ -5,7 +5,7 @@
         "general-page": {
             "type": "page",
             "title": "Appearance",
-            "sections": ["language-section", "preset-section", "effects-section"]
+            "sections": ["language-section", "preset-section", "wallpaper-section", "effects-section"]
         },
         "advanced-page": {
             "type": "page",
@@ -21,6 +21,11 @@
             "type": "section",
             "title": "Windows 11 Theme & Opacity",
             "keys": ["preset", "opacity-level", "adapt-light-text"]
+        },
+        "wallpaper-section": {
+            "type": "section",
+            "title": "Custom Wallpaper",
+            "keys": ["use-custom-wallpaper", "custom-wallpaper-variant"]
         },
         "effects-section": {
             "type": "section",
@@ -90,6 +95,22 @@
         "default": true,
         "description": "Use dark text and icons in Light mode",
         "dependency": "preset!=win11-dark"
+    },
+    "use-custom-wallpaper": {
+        "type": "switch",
+        "default": false,
+        "description": "Use extension custom wallpaper",
+        "tooltip": "Applies the bundled Mint Light or Dark wallpaper immediately. Disable to restore your previous wallpaper."
+    },
+    "custom-wallpaper-variant": {
+        "type": "combobox",
+        "default": "dark",
+        "description": "Wallpaper variant",
+        "dependency": "use-custom-wallpaper",
+        "options": {
+            "Light": "light",
+            "Dark": "dark"
+        }
     },
     "blur-start-menu": {
         "type": "switch",
